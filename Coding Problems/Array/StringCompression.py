@@ -1,34 +1,34 @@
-from typing import List
-
-def compress(chars: List[str]) -> int:
+class Solution:
+    def compress(self, chars: List[str]) -> int:
         output = []
         count = 1
-        for i in range(len(chars)):
+        j = 0
+        for i in range(1, len(chars)+1):
+            previous = chars[i-1]
+            if i == len(chars):
+                output.append(previous)
+
+                if count >1 :
+                    for s in str(count):
+                        output.append(s)
+                break
+    
             current = chars[i]
 
-            # Check if current char not previous char
-            if current != previous or (i == len(chars) -1):
-                print("Current ", current, " is different previous: ", previous)
-                if count > 1:
-                    for char in str(count):
-                        output.append(char)
-                
-                output.append(current)
+            if current != previous:
+                output.append(previous)
 
-                previous = current
+                if count > 1:
+                    for s in str(count):
+                        output.append(s) 
+                
                 count = 1
             else:
-                print("just count + 1 for ", previous, " and ", current)
                 count +=1
-                print(count)
 
-            print(" End loop                   ", i )
-        if output != chars:
-            chars = output + chars
+        for i in output:
+            chars[j] = i
+            j +=1
 
-        print(output)
+        return len(output)
 
-
-a= ["a","a","b","b","c","c","c"]
-
-compress(chars=a)
