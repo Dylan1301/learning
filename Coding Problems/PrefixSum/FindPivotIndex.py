@@ -11,3 +11,6 @@ class Solution:
             left += nums[i]
         
         return -1
+
+
+# Got 95% faster
